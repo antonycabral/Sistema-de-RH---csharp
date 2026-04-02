@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaHR.Data;
+using SistemaHR.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Registramos o DbContext para Injeção de Dependência
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
 var app = builder.Build();
 
